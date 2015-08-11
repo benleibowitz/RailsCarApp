@@ -1,0 +1,28 @@
+.navbar {
+	background-color: #494949;
+}
+
+.navbar-item {
+	display:inline-block;
+	margin-top:10px;
+	margin-left:5px;
+}
+
+#home-icon, #home-icon:hover {
+	color: white;
+	background-color: #494949; 
+}
+
+.container {
+	margin: 0px auto 0px auto;
+	min-width: 500px;
+}
+
+.table td, .table th {
+	text-align: center;
+}
+
+.mod-table {
+	max-width:750px;
+}
+
