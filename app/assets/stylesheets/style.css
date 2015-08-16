@@ -3,9 +3,9 @@
 }
 
 .navbar-item {
-	display:inline-block;
-	margin-top:10px;
-	margin-left:5px;
+	display: inline-block;
+	margin-top: 10px;
+	margin-left: 5px;
 }
 
 #home-icon, #home-icon:hover {
@@ -16,6 +16,10 @@
 .container {
 	margin: 0px auto 0px auto;
 	min-width: 500px;
+	border: solid;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: #E6E6E6;
 }
 
 .table td, .table th {
@@ -23,6 +27,10 @@
 }
 
 .mod-table {
-	max-width:750px;
+	max-width: 750px;
+}
+
+.btn-primary, .btn-primary:visited, .btn-primary:hover {
+	color: #F7F7F7;
 }
 

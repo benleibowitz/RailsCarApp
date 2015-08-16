@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# memcached stuff
+gem 'dalli'
+gem 'memcachier'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
