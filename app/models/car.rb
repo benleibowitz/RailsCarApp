@@ -3,6 +3,9 @@ class Car < ActiveRecord::Base
 	default_scope { order('make ASC, year DESC, model ASC') }
 	validates :year, :make, :model, :price, :presence => true
 
+	has_attached_file :image
+	validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"], :less_than => 2.megabytes, 
+
 	after_save    :expire_car_all_cache
 	after_destroy :expire_car_all_cache
 

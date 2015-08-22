@@ -15,7 +15,7 @@
         <td><%= car.year %></td>
         <td><%= car.make %></td>
         <td><%= car.model %></td>
-        <td>$<%= car.build_cost %></td>
+        <td>$<%= number_with_delimiter(car.build_cost, :delimiter => ',') %></td>
         <td>
           <div class="btn-group" role="group">
             <%= link_to 'View', car, :class => "btn btn-primary" %>
