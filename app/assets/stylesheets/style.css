@@ -30,7 +30,9 @@
 	max-width: 750px;
 }
 
-.btn-primary, .btn-primary:visited, .btn-primary:hover {
+.btn-primary, .btn-primary:visited, .btn-primary:hover,
+.btn-danger, .btn-danger:visited, .btn-danger:hover,
+.btn-success, .btn-success:visited, .btn-success:hover {
 	color: #F7F7F7;
 }
 
