@@ -49,13 +49,6 @@
         </td>
       </tr>
     <% end %>
-    <%= form_for([@car, @car.modifications.build]) do |f| %>
-    <tr>
-      <td><%= f.text_field :name, :placeholder => "Modification Name" %></td>
-      <td><%= f.text_field :price, :placeholder => "Modification Price" %></td>
-      <td><div><%= f.submit "Add", :class => "btn btn-success" %></div></td>
-    </tr>
-    <% end %>
     <tr>
     	<td><strong>Mods Total</strong></td>
     	<td><strong>$<%= number_with_delimiter(@car.modifications.sum(:price), :delimiter => ',') %></strong></td>
@@ -68,3 +61,16 @@
     </tr>
   </tbody>
 </table>
+
+<h3>Add Modification</h3>
+
+<%= form_for([@car, @car.modifications.build]) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :price %>
+  <%= f.number_field :price %>
+
+  <br>
+  <%= f.submit "Add", :class => "btn btn-success" %>
+<% end %>

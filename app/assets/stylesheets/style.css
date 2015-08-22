@@ -8,6 +8,10 @@
 	margin-left: 5px;
 }
 
+#new-car-button {
+	color: #494949;
+}
+
 #home-icon, #home-icon:hover {
 	color: white;
 	background-color: #494949; 
@@ -30,10 +34,13 @@
 	max-width: 750px;
 }
 
-.btn-primary, .btn-primary:visited, .btn-primary:hover,
-.btn-danger, .btn-danger:visited, .btn-danger:hover,
-.btn-success, .btn-success:visited, .btn-success:hover {
+.btn, .btn:visited, .btn:hover {
 	color: #F7F7F7;
+}
+
+.btn-group .btn-success {
+	width: 65px;
+	text-align: center;
 }
 
 .car-image {
@@ -43,4 +50,5 @@
 	margin-right: auto;
     display: block;
 }
+
 
