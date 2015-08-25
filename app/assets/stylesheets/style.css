@@ -19,7 +19,10 @@
 
 .container {
 	margin: 0px auto 0px auto;
-	min-width: 500px;
+	min-width: 750px;
+}
+
+#main-container {
 	border: solid;
 	border-width: 1px;
 	border-radius: 5px;
