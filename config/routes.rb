@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :cars do
     resources :modifications
   end
+
+  get 'cars/:id/clone' => 'cars#clone', :as => :clone_car
   # get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

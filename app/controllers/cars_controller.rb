@@ -21,6 +21,13 @@ class CarsController < ApplicationController
   def edit
   end
 
+  # GET /cars/1/clone
+  def clone
+    @old_car = Car.find(params[:id])
+    @car = @old_car.dup
+    render :new
+  end
+
   # POST /cars
   # POST /cars.json
   def create
