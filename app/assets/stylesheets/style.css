@@ -66,4 +66,7 @@
     display: block;
 }
 
-
+.link, .link:hover, .link:visited {
+	color: #494949;
+	background-color: white;
+}
