@@ -26,7 +26,9 @@
 </p>
 
 <% if @car.image? %>
-  <%= image_tag @car.image.url, :class => "car-image" %>
+  <div class="pic-container">
+    <%= image_tag @car.image.url, :class => "car-image" %>
+  </div>
 <% end %>
 
 <br />

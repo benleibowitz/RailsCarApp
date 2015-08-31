@@ -8,7 +8,7 @@
 	margin-left: 5px;
 }
 
-#new-car-button {
+#new-car-button, #cancel-button {
 	color: #494949;
 }
 
@@ -47,6 +47,17 @@
 }
 
 .car-image {
+	max-width: 500px;
+	max-height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+    display: block;
+}
+
+.pic-container {
+	-webkit-box-shadow: 5px 5px 15px 10px #949494;
+	box-shadow: 5px 5px 15px 10px #949494;
+
 	max-width: 500px;
 	max-height: 500px;
 	margin-left: auto;
