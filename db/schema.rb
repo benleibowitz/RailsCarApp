@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150822024321) do
+ActiveRecord::Schema.define(version: 20150911222558) do
+
+  create_table "assets", force: :cascade do |t|
+    t.integer  "car_id",             limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
+  end
+
+  add_index "assets", ["car_id"], name: "index_assets_on_car_id", using: :btree
 
   create_table "cars", force: :cascade do |t|
     t.integer  "year",               limit: 4
@@ -36,5 +48,6 @@ ActiveRecord::Schema.define(version: 20150822024321) do
 
   add_index "modifications", ["car_id"], name: "index_modifications_on_car_id", using: :btree
 
+  add_foreign_key "assets", "cars"
   add_foreign_key "modifications", "cars"
 end

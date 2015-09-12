@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :cars do
     resources :modifications
+    resources :assets
   end
   
   get 'cars/:id/clone' => 'cars#clone', :as => :clone_car

@@ -25,9 +25,19 @@
   </p>
 </div>
 
+<% if false %>
 <% if @car.image? %>
   <div class="pic-container">
     <%= image_tag @car.image.url, :class => "car-image" %>
+  </div>
+<% end %>
+<% end %>
+
+<% @car.assets.each do |asset| %>
+  <div class="pic-container">
+    <%= image_tag asset.image.url, :class => "car-image" %>
+    <%= link_to 'Delete', [@car, asset], :method => :delete, data: { confirm: 'Are you sure you want to delete this picture?' }, :class => "btn btn-danger" %>
+    <br/>
   </div>
 <% end %>
 
@@ -74,6 +84,17 @@
   <%= f.label :price %>
   <%= f.number_field :price %>
 
+  <br>
+  <%= f.submit "Add", :class => "btn btn-success" %>
+<% end %>
+
+<h3>Add Pic</h3>
+
+<%= form_for([@car, @car.assets.build]) do |f| %>
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
   <br>
   <%= f.submit "Add", :class => "btn btn-success" %>
 <% end %>
