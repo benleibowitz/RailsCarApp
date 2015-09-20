@@ -62,6 +62,9 @@
     display: block;
 
     text-align: center;
+    background-color: #F2F2F2;
+
+    border-radius: 10px;
 }
 
 .link, .link:hover, .link:visited {

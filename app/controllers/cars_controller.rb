@@ -25,6 +25,7 @@ class CarsController < ApplicationController
   def clone
     @old_car = Car.find(params[:id])
     @car = @old_car.dup
+
     render :new
   end
 
