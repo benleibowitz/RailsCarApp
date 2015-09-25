@@ -2,6 +2,7 @@
 
 <script>
 $('#search-box').keyup(function() {
+  var searchDropdown = document.getElementById("autocomp");
   var search = document.getElementById("search-box");
   var textVal = search.value;
   
@@ -10,14 +11,26 @@ $('#search-box').keyup(function() {
     url:'/search',
     data: { _method:'PUT', text : textVal },
     success:function(resp){
-      search.value = resp[0].make;
+      //remove old search suggestions
+      while(searchDropdown.firstChild) {
+        searchDropdown.removeChild(searchDropdown.firstChild);
+      }
+
+      //add new suggestions
+      resp.forEach(function(respCar) {
+        var option = document.createElement('option');
+        option.value = respCar.make + " " + respCar.model;
+        searchDropdown.appendChild(option);
+      });
     }
   });
 });
 </script>
 
 <form>
-  <input type="text" name="search" id="search-box" autocomplete="off">
+  <input type="text" name="search" id="search-box" autocomplete="off" list="autocomp">
+  <datalist id="autocomp">
+  </datalist>
   <input type="submit" value="Search">
 </form>
 
