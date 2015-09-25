@@ -2,7 +2,7 @@ class CarsController < ApplicationController
   before_action :set_car, only: [:show, :edit, :update, :destroy]
 
   def search
-    @cars = Car.where("make LIKE :prefix", prefix: "#{params[:text]}%").limit(5)
+    @cars = Car.where("make LIKE :prefix", prefix: "#{params[:text]}%").group(:make).distinct.limit(5)
     puts @cars
     render json: @cars
   end

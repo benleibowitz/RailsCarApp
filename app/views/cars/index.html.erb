@@ -1,7 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <script>
-$('#search-box').keyup(function() {
+$('#search-box').keyup(function(evt) {
+  // get keycode of current keypress event
+  var code = (evt.keyCode || evt.which);
+
+  // do nothing if it's an arrow key
+  if(code == 37 || code == 38 || code == 39 || code == 40) {
+      return;
+  }
+
   var searchDropdown = document.getElementById("autocomp");
   var search = document.getElementById("search-box");
   var textVal = search.value;
@@ -19,7 +27,7 @@ $('#search-box').keyup(function() {
       //add new suggestions
       resp.forEach(function(respCar) {
         var option = document.createElement('option');
-        option.value = respCar.make + " " + respCar.model;
+        option.value = respCar.make;
         searchDropdown.appendChild(option);
       });
     }
