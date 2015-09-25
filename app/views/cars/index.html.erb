@@ -1,4 +1,26 @@
 <p id="notice"><%= notice %></p>
+
+<script>
+$('#search-box').keyup(function() {
+  var search = document.getElementById("search-box");
+  var textVal = search.value;
+  
+  $.ajax({
+    type:'PUT',
+    url:'/search',
+    data: { _method:'PUT', text : textVal },
+    success:function(resp){
+      search.value = resp[0].make;
+    }
+  });
+});
+</script>
+
+<form>
+  <input type="text" name="search" id="search-box" autocomplete="off">
+  <input type="submit" value="Search">
+</form>
+
 <p>Cars: <strong><%= @cars.size %></strong></p>
 <table class="table table-striped">
   <thead>

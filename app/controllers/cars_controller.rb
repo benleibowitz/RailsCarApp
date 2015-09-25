@@ -1,10 +1,20 @@
 class CarsController < ApplicationController
   before_action :set_car, only: [:show, :edit, :update, :destroy]
 
+  def search
+    @cars = Car.where("make LIKE :prefix", prefix: "#{params[:text]}%")
+    puts @cars
+    render json: @cars
+  end
+
   # GET /cars
   # GET /cars.json
   def index
-    @cars = Car.all_from_cache
+    if params.has_key?(:search)
+      @cars = Car.where("make LIKE :prefix", prefix: "#{params[:search]}%")
+    else
+      @cars = Car.all_from_cache
+    end
   end
 
   # GET /cars/1

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   end
   
   get 'cars/:id/clone' => 'cars#clone', :as => :clone_car
+  put 'search' => 'cars#search'
   # get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
