@@ -12,7 +12,7 @@ class CarsController < ApplicationController
   # GET /cars.json
   def index
     if params.has_key?(:search)
-      @cars = Car.where("make LIKE :prm", prm: "%#{params[:search]}%")
+      @cars = Car.where("make LIKE :prm OR model LIKE :prm", prm: "%#{params[:search]}%")
     else
       @cars = Car.all_from_cache
     end

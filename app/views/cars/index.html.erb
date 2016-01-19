@@ -34,6 +34,24 @@ $('#search-box').keyup(function(evt) {
   });
 });
 
+function calcGarage() {
+  var total = 0;
+
+  var inputs = document.getElementsByTagName("input");
+
+  for(var i = 0; i < inputs.length; i++) {
+    var input = inputs[i];
+
+    if(input.type == "checkbox") {
+      if(input.checked) {
+        total += parseInt(input.value);
+      }
+    }  
+  }
+
+  document.getElementById("gar-total").innerHTML = "Total cost of cars in garage: <b>$" + total.toLocaleString('en', {useGrouping:true}) + "</b>";
+};
+
 </script>
 
 <form>
@@ -44,6 +62,7 @@ $('#search-box').keyup(function(evt) {
 </form>
 
 <p>Cars: <strong><%= @cars.size %></strong></p>
+<p id="gar-total">Total cost of cars in garage: <b>$0</b></p>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -66,6 +85,7 @@ $('#search-box').keyup(function(evt) {
             <%= link_to 'View', car, :class => "btn btn-primary" %>
             <%= link_to 'Edit', edit_car_path(car), :class => "btn btn-primary" %>
             <%= link_to 'Delete', car, method: :delete, data: { confirm: 'Are you sure you want to delete this car?' }, :class => "btn btn-primary" %>
+            <input class="car-checkbox" type="checkbox" value=<%= car.build_cost %> onclick="calcGarage()">
           </div>
         </td>
       </tr>
