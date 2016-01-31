@@ -24,8 +24,18 @@ class AssetsController < ApplicationController
   # POST /assets
   # POST /assets.json
   def create
+
     @car = Car.find(params[:car_id])
-    @asset = @car.assets.create(asset_params)
+
+    # This creates a single asset if the picture uploaded
+    # is there is no multipart form_for in the html.erb
+    #@asset = @car.assets.create(asset_params)
+
+    # This creates assets for EACH image given a multipart
+    # form_for assets in the html.erb
+    asset_params[:image].each do |image_asset|
+      @asset = @car.assets.create({'image' => image_asset})
+    end
 
     redirect_to car_path(@car)
 
@@ -54,6 +64,6 @@ class AssetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def asset_params
-      params.require(:asset).permit(:car_id, :image)
+      params.require(:asset).permit!#(:car_id, :image)
     end
 end

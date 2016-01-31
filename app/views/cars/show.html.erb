@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Back', cars_path, :class => "link" %> | 
+<%= link_to 'Back', cars_path, :class => "link" %> |
 <%= link_to 'Edit', edit_car_path(@car), :class => "link" %> |
 <%= link_to 'Duplicate', clone_car_path(@car), :class => "link" %> |
 <%= link_to 'Delete', @car, method: :delete, data: { confirm: 'Are you sure you want to delete this car?' }, :class => "link" %>
@@ -75,9 +75,9 @@
 
 <br/>
 <h3>Add Pic</h3>
-<%= form_for([@car, @car.assets.build]) do |f| %>
+<%= form_for([@car, @car.assets.build], :html => { :multipart => true }) do |f| %>
   <div class="field">
-    <%= f.file_field :image %>
+    <%= f.file_field :image, :multiple => true %>
   </div>
   <%= f.submit "Add", :class => "btn btn-success" %>
 <% end %>

@@ -13,7 +13,7 @@ $('#search-box').keyup(function(evt) {
   var searchDropdown = document.getElementById("autocomp");
   var search = document.getElementById("search-box");
   var textVal = search.value;
-  
+
   $.ajax({
     type:'PUT',
     url:'/search',
@@ -35,7 +35,8 @@ $('#search-box').keyup(function(evt) {
 });
 
 function calcGarage() {
-  var total = 0;
+  var totalCost = 0;
+  var totalNumber = 0;
 
   var inputs = document.getElementsByTagName("input");
 
@@ -44,14 +45,15 @@ function calcGarage() {
 
     if(input.type == "checkbox") {
       if(input.checked) {
-        total += parseInt(input.value);
+        totalCost += parseInt(input.value);
+        totalNumber += 1;
       }
-    }  
+    }
   }
 
-  document.getElementById("gar-total").innerHTML = "Total cost of cars in garage: <b>$" + total.toLocaleString('en', {useGrouping:true}) + "</b>";
+  document.getElementById("gar-number").innerHTML = "Total number of selected cars: <b>" + totalNumber + "</b>";
+  document.getElementById("gar-cost").innerHTML = "Total cost of selected cars: <b>$" + totalCost.toLocaleString('en', {useGrouping:true}) + "</b>";
 };
-
 </script>
 
 <form>
@@ -62,7 +64,9 @@ function calcGarage() {
 </form>
 
 <p>Cars: <strong><%= @cars.size %></strong></p>
-<p id="gar-total">Total cost of cars in garage: <b>$0</b></p>
+<p id="gar-number">Total number of selected cars: <b>0</b></p>
+<p id="gar-cost">Total cost of selected cars: <b>$0</b></p>
+
 <table class="table table-striped">
   <thead>
     <tr>
