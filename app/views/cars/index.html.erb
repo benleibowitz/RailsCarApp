@@ -38,7 +38,8 @@ function calcGarage() {
   var totalCost = 0;
   var totalNumber = 0;
 
-  var inputs = document.getElementsByTagName("input");
+  //var inputs = document.getElementsByTagName("input");
+  var inputs = document.getElementsByClassName("car-checkbox");
 
   for(var i = 0; i < inputs.length; i++) {
     var input = inputs[i];
@@ -54,6 +55,23 @@ function calcGarage() {
   document.getElementById("gar-number").innerHTML = "Total number of selected cars: <b>" + totalNumber + "</b>";
   document.getElementById("gar-cost").innerHTML = "Total cost of selected cars: <b>$" + totalCost.toLocaleString('en', {useGrouping:true}) + "</b>";
 };
+
+var allChecked = false;
+
+function selectAll() {
+    var inputs = document.getElementsByClassName("car-checkbox");
+
+    for(var i = 0; i < inputs.length; i++) {
+        var input = inputs[i];
+
+        if(input.type == "checkbox") {
+            input.checked = !allChecked;
+        }
+    }
+
+    calcGarage();
+    allChecked = !allChecked;
+}
 </script>
 
 <form>
@@ -74,7 +92,7 @@ function calcGarage() {
       <th>Make</th>
       <th>Model</th>
       <th>Build Cost</th>
-      <th></td>
+      <th>Select All <input type="checkbox" onclick="selectAll()"></th>
     </tr>
   </thead>
   <tbody>

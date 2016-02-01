@@ -4,7 +4,7 @@ class CarsController < ApplicationController
   def search
     @cars = Car.where("make LIKE :prm", prm: "#{params[:text]}%")
       .group(:make).distinct.limit(5)
-      
+
     render json: @cars
   end
 
@@ -36,7 +36,16 @@ class CarsController < ApplicationController
   def clone
     @old_car = Car.find(params[:id])
     @car = @old_car.dup
-
+    
+    '''
+    @old_car.assets.each do |asset|
+        new_asset = asset.dup
+        new_asset.car = @car
+        new_asset.save
+        @car.assets << new_asset
+    end
+    '''
+    
     render :new
   end
 
