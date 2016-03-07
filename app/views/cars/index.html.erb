@@ -38,17 +38,14 @@ function calcGarage() {
   var totalCost = 0;
   var totalNumber = 0;
 
-  //var inputs = document.getElementsByTagName("input");
-  var inputs = document.getElementsByClassName("car-checkbox");
+  var elements = document.getElementsByClassName("car-checkbox");
 
-  for(var i = 0; i < inputs.length; i++) {
-    var input = inputs[i];
+  for(var i = 0; i < elements.length; i++) {
+    var input = elements[i];
 
-    if(input.type == "checkbox") {
-      if(input.checked) {
+    if(input.checked) {
         totalCost += parseInt(input.value);
         totalNumber += 1;
-      }
     }
   }
 
@@ -59,10 +56,10 @@ function calcGarage() {
 var allChecked = false;
 
 function selectAll() {
-    var inputs = document.getElementsByClassName("car-checkbox");
+    var elements = document.getElementsByClassName("car-checkbox");
 
-    for(var i = 0; i < inputs.length; i++) {
-        var input = inputs[i];
+    for(var i = 0; i < elements.length; i++) {
+        var input = elements[i];
 
         if(input.type == "checkbox") {
             input.checked = !allChecked;
@@ -71,7 +68,7 @@ function selectAll() {
 
     calcGarage();
     allChecked = !allChecked;
-}
+};
 </script>
 
 <form>
