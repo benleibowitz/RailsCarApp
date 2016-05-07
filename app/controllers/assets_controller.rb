@@ -33,8 +33,14 @@ class AssetsController < ApplicationController
 
     # This creates assets for EACH image given a multipart
     # form_for assets in the html.erb
-    asset_params[:image].each do |image_asset|
+    num_images = asset_params[:image].size
+    asset_params[:image].each_with_index do |image_asset, idx|
+      image_num = idx + 1
+      puts "Adding image number #{image_num} / #{num_images}"
       @asset = @car.assets.create({'image' => image_asset})
+
+      # safety check
+      break if image_num >= 500
     end
 
     redirect_to car_path(@car)
@@ -64,6 +70,6 @@ class AssetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def asset_params
-      params.require(:asset).permit!#(:car_id, :image)
+      params.require(:asset).permit(:car_id, :image => [])
     end
 end

@@ -48,12 +48,12 @@
     <% end %>
     <tr>
     	<td><strong>Mods Total</strong></td>
-    	<td><strong>$<%= number_with_delimiter(@car.modifications.sum(:price), :delimiter => ',') %></strong></td>
+        <td><strong>$<%= number_with_delimiter(@car.modifications.sum(:price), :delimiter => ',') %></strong></td>
     	<td></td>
     </tr>
     <tr>
     	<td><strong>Build Total</strong></td>
-    	<td><strong>$<%= number_with_delimiter(@car.modifications.sum(:price) + @car.price, :delimiter => ',') %></strong></td>
+    	<td><strong>$<%= number_with_delimiter(@car.build_cost, :delimiter => ',') %></strong></td>
     	<td></td>
     </tr>
   </tbody>

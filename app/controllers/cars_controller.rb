@@ -36,7 +36,7 @@ class CarsController < ApplicationController
   def clone
     @old_car = Car.find(params[:id])
     @car = @old_car.dup
-    
+
     '''
     @old_car.assets.each do |asset|
         new_asset = asset.dup
@@ -45,7 +45,7 @@ class CarsController < ApplicationController
         @car.assets << new_asset
     end
     '''
-    
+
     render :new
   end
 
