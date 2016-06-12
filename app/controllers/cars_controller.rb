@@ -37,14 +37,14 @@ class CarsController < ApplicationController
     @old_car = Car.find(params[:id])
     @car = @old_car.dup
 
-    '''
+    #copy over images to new car
     @old_car.assets.each do |asset|
-        new_asset = asset.dup
-        new_asset.car = @car
-        new_asset.save
-        @car.assets << new_asset
+      new_asset = asset.dup
+      new_asset.image = File.open(asset.image.path,'rb')
+      @car.assets << new_asset
     end
-    '''
+
+    @car.save
 
     render :new
   end

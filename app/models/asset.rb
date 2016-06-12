@@ -6,4 +6,5 @@ class Asset < ActiveRecord::Base
 	validates_attachment_size :image, :less_than => 5.megabytes
 
 	validates :image, :presence => true
+
 end

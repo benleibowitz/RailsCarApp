@@ -24,4 +24,5 @@ class Car < ActiveRecord::Base
 	def build_cost
 		Rails.cache.fetch(self.id, expires_in: 1.hour) { modifications.sum(:price) + price }
 	end
+
 end
