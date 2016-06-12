@@ -27,7 +27,9 @@
 </div>
 
 <br />
-<h3>Modifications</h3>
+<h3>Modifications:
+  <%= @car.modifications.size %>
+</h3>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -83,6 +85,9 @@
   <%= f.submit "Add", :class => "btn btn-success" %>
 <% end %>
 
+<h3>Pics:
+  <%= @car.assets.size - 1 %>
+</h3>
 <% @car.assets(true).each do |asset| %>
   <div class="pic-container">
     <%= link_to asset.image.url do %>

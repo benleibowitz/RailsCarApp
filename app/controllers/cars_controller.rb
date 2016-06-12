@@ -45,8 +45,10 @@ class CarsController < ApplicationController
     end
 
     @car.save
-
-    render :new
+    respond_to do |format|
+      format.html { redirect_to @car, notice: 'Car successfully duplicated.' }
+      format.json { render :show, status: :created, location: @car }
+    end
   end
 
   # POST /cars
