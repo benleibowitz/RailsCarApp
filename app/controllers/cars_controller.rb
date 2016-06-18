@@ -38,10 +38,17 @@ class CarsController < ApplicationController
     @car = @old_car.dup
 
     #copy over images to new car
+    pics_saved = 0
     @old_car.assets.each do |asset|
       new_asset = asset.dup
       new_asset.image = File.open(asset.image.path,'rb')
       @car.assets << new_asset
+
+      pics_saved += 1
+
+      if pics_saved % 3 == 0
+        @car.save
+      end
     end
 
     @car.save
