@@ -6,6 +6,16 @@ class ModificationsController < ApplicationController
 		redirect_to car_path(@car)
 	end
 
+  def index
+    @car = Car.find(params[:car_id])
+    render json: @car.modifications
+  end
+
+  def show
+    @modification = Modification.find(params[:id])
+    render json: @modification
+  end
+
 	def destroy
 		@car = Car.find(params[:car_id])
 		@modification = @car.modifications.find(params[:id])
@@ -14,7 +24,7 @@ class ModificationsController < ApplicationController
 		redirect_to car_path(@car)
 	end
 
-	private 
+	private
 	def modification_params
 		params.require(:modification).permit(:name, :price)
 	end

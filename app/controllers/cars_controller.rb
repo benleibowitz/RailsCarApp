@@ -37,6 +37,12 @@ class CarsController < ApplicationController
     @old_car = Car.find(params[:id])
     @car = @old_car.dup
 
+    @old_car.modifications.each do |mod|
+      @car.modifications << mod.dup
+    end
+
+    @car.save
+
     #copy over images to new car
     pics_saved = 0
     @old_car.assets.each do |asset|

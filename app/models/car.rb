@@ -11,18 +11,18 @@ class Car < ActiveRecord::Base
 	# after car is saved, delete the (select * ...) data
 	# and delete the build cost data from cache
 	def expire_car_all_cache
-	  Rails.cache.delete('Car.all')
-	  Rails.cache.delete(self.id)
+	  Rails.cache.delete("Car.all")
+	  Rails.cache.delete("car_#{self.id}")
 	end
 
 	# fetch all cars data (select * from cars ...) from cache
 	def self.all_from_cache
-	  Rails.cache.fetch('Car.all', expires_in: 1.hour) { all }
+	  Rails.cache.fetch("Car.all", expires_in: 1.hour) { all }
 	end
 
 	# method to cache build cost for car instance
 	def build_cost
-		Rails.cache.fetch(self.id, expires_in: 1.hour) { modifications.sum(:price) + price }
+		Rails.cache.fetch("car_#{self.id}", expires_in: 1.hour) { modifications.sum(:price) + price }
 	end
 
 end

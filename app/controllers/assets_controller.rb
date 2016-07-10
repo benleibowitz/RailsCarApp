@@ -4,12 +4,24 @@ class AssetsController < ApplicationController
   # GET /assets
   # GET /assets.json
   def index
-    @assets = Asset.all
+    @car = Car.find(params[:car_id])
+    @assets = @car.assets
+
+    respond_to do |format|
+      format.xml {render xml: @assets}
+      format.json {render json: @assets}
+    end
   end
 
   # GET /assets/1
   # GET /assets/1.json
   def show
+    @asset = Asset.find(params[:id])
+
+    respond_to do |format|
+      format.xml {render xml: @asset}
+      format.json {render json: @asset}
+    end
   end
 
   # GET /assets/new
