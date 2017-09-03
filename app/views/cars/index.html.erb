@@ -1,36 +1,38 @@
 <p id="notice"><%= notice %></p>
 
 <script>
-$('#search-box').keyup(function(evt) {
-  // get keycode of current keypress event
-  var code = (evt.keyCode || evt.which);
+$(function(){
+  $('#search-box').keyup(function(evt) {
+    // get keycode of current keypress event
+    var code = (evt.keyCode || evt.which);
 
-  // do nothing if it's an arrow key
-  if(code == 37 || code == 38 || code == 39 || code == 40) {
-    return;
-  }
-
-  var searchDropdown = document.getElementById("autocomp");
-  var search = document.getElementById("search-box");
-  var textVal = search.value;
-
-  $.ajax({
-    type:'PUT',
-    url:'/search',
-    data: { _method:'PUT', text : textVal },
-    success:function(resp){
-      //remove old search suggestions
-      while(searchDropdown.firstChild) {
-        searchDropdown.removeChild(searchDropdown.firstChild);
-      }
-
-      //add new suggestions
-      resp.forEach(function(respCar) {
-        var option = document.createElement('option');
-        option.value = respCar.make;
-        searchDropdown.appendChild(option);
-      });
+    // do nothing if it's an arrow key
+    if(code == 37 || code == 38 || code == 39 || code == 40) {
+      return;
     }
+
+    var searchDropdown = document.getElementById("autocomp");
+    var search = document.getElementById("search-box");
+    var textVal = search.value;
+
+    $.ajax({
+      type:'PUT',
+      url:'/search',
+      data: { _method:'PUT', text : textVal },
+      success:function(resp){
+        //remove old search suggestions
+        while(searchDropdown.firstChild) {
+          searchDropdown.removeChild(searchDropdown.firstChild);
+        }
+
+        //add new suggestions
+        for(var i = 0; i < resp.length; i++) {
+          var option = document.createElement('option');
+          option.value = resp[i];
+          searchDropdown.appendChild(option);
+        }
+      }
+    });
   });
 });
 
@@ -70,33 +72,47 @@ function selectAll() {
     allChecked = !allChecked;
 };
 </script>
-<%= link_to 'Show All', cars_path(:show_all => true), :class => 'btn btn-info' %>
-<%= link_to 'Show Paginated', cars_path, :class => 'btn btn-info' %>
-<br/><br/>
-<form>
-  <input type="text" name="search" id="search-box" autocomplete="off" list="autocomp">
-    <datalist id="autocomp"></datalist>
-  <input type="submit" value="Search">
-</form>
 
-<p>Cars: <strong><%= Car.number_cars %></strong></p>
-<p id="gar-number">Total number of selected cars: <b>0</b></p>
-<p id="gar-cost">Total cost of selected cars: <b>$0</b></p>
+<%= form_tag '/cars', method: :get do %>
+<div class="input-group">
+   <%= text_field_tag :search, nil, :class => 'form-control', :placeholder => 'Search', :id => 'search-box', :autocomplete => :off, :list => "autocomp" %>
+     <datalist id="autocomp">
+     </datalist>
+   <span class="input-group-btn">
+     <%= button_tag 'search-button', :name => nil, :class => "btn btn-default" do %>
+        <span class='glyphicon glyphicon-search'></span>
+     <% end %>
+   </span>
+</div>
+<% end %>
 
+</br></br>
+
+<div>
+  <p>Cars: <strong><%= Car.number_cars %></strong></p>
+  <p id="gar-number">Total number of selected cars: <b>0</b></p>
+  <p id="gar-cost">Total cost of selected cars: <b>$0</b></p>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
+      <th><span><input type="checkbox" onclick="selectAll()"> Select All</span></th>
       <th>Year</th>
       <th>Make</th>
       <th>Model</th>
       <th>Build Cost</th>
       <th>Pics</th>
-      <th>Select All <input type="checkbox" onclick="selectAll()"></th>
+      <th colspan="3"></th>
     </tr>
   </thead>
   <tbody>
     <% @cars.each do |car| %>
       <tr>
+        <td>
+          <span>
+            <input class="car-checkbox" type="checkbox" value=<%= car.build_cost %> onclick="calcGarage()">
+          </span>
+        </td>
         <td><%= car.year %></td>
         <td><%= car.make %></td>
         <td><%= car.model %></td>
@@ -107,7 +123,6 @@ function selectAll() {
             <%= link_to 'View', car, :class => "btn btn-primary" %>
             <%= link_to 'Edit', edit_car_path(car), :class => "btn btn-primary" %>
             <%= link_to 'Delete', car, method: :delete, data: { confirm: 'Are you sure you want to delete this car?' }, :class => "btn btn-primary" %>
-            <input class="car-checkbox" type="checkbox" value=<%= car.build_cost %> onclick="calcGarage()">
           </div>
         </td>
       </tr>
@@ -116,8 +131,9 @@ function selectAll() {
 </table>
 <br>
 <div class="apple_pagination">
-    <div class="page_info">
-      <%= page_entries_info @cars %>
-    </div>
-    <%= will_paginate @cars, :container => false %>
+  <div class="page_info">
+    <%= page_entries_info @cars %>
   </div>
+  <%= will_paginate @cars, :container => false %>
+</div>
+</br></br>

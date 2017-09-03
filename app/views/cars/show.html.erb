@@ -119,13 +119,13 @@ function selectAll() {
 
 <%= form_for([@car, @car.modifications.build]) do |f| %>
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :placeholder => "Name", :class => "form-control" %>
   </div>
+  </br>
   <div class="field">
-    <%= f.label :price %>
-    <%= f.number_field :price %>
+    <%= f.number_field :price, :placeholder => "Price", :class => "form-control" %>
   </div>
+  </br>
   <%= f.submit "Add", :class => "btn btn-success" %>
 <% end %>
 
@@ -135,6 +135,7 @@ function selectAll() {
   <div class="field">
     <%= f.file_field :image, :multiple => true %>
   </div>
+  </br>
   <%= f.submit "Add", :class => "btn btn-success" %>
 <% end %>
 
@@ -142,10 +143,11 @@ function selectAll() {
   <%= @car.assets.size - 1 %>
 </h3>
 <% @car.assets(true).each do |asset| %>
-  <div class="pic-container">
+  <div>
     <%= link_to asset.image.url do %>
-      <%= image_tag asset.image.url, :class => "car-image" %>
+      <%= image_tag asset.image.url, :class => "img-thumbnail" %>
     <% end %>
+    <br>
     <%= link_to 'Delete', [@car, asset], :method => :delete, data: { confirm: 'Are you sure you want to delete this picture?' }, :class => "btn btn-danger" %>
   </div>
   <br/>

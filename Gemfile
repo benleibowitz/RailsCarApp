@@ -7,6 +7,9 @@ gem 'paperclip'
 gem 'amoeba'
 gem 'will_paginate', '~> 3.1.0'
 
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'autoprefixer-rails'
+
 #gem 'rack-cors', :require => 'rack/cors'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

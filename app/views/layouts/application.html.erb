@@ -9,37 +9,23 @@
 <body>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <%= link_to 'Car Database', cars_path, :class => "pull-left navbar-item", :id => "home-icon" %>
+        <%= link_to 'Car Database', cars_path, :class => "navbar-brand" %>
       </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to 'New Car', new_car_path %></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">FOO<span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li>FOO1</li>
-              <li>BAR</li>
+              <li><%= link_to 'View All', cars_path(:show_all => true) %></li>
+              <li><%= link_to 'View Paginated', cars_path %></li>
             </ul>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-	<!-- <nav class="navbar navbar-default">
-	  <div class="container">
-	  	<%= link_to 'Car Database', cars_path, :class => "pull-left navbar-item", :id => "home-icon" %>
-	  	<%= link_to 'New Car', new_car_path, :class => "btn btn-default pull-right navbar-item", :id => "new-car-button" %>
-    </div>
-	</nav> -->
 	<div class="container" id="main-container">
 		<%= yield %>
 	</div>

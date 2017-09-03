@@ -12,21 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :year %>
-    <%= f.number_field :year, :autofocus => true %>
+    <%= f.number_field :year, :autofocus => true, :placeholder => "Year", :class => "form-control" %>
   </div>
+  <br>
   <div class="field">
-    <%= f.label :make %>
-    <%= f.select :make, options_for_select(Car.makes, @car.make) %>
+    <%= f.select :make, options_for_select(Car.makes, @car.make), {}, :class => "form-control" %>
   </div>
+  <br>
   <div class="field">
-    <%= f.label :model %>
-    <%= f.text_field :model %>
+    <%= f.text_field :model, :placeholder => "Model", :class => "form-control" %>
   </div>
+  <br>
   <div class="field">
-    <%= f.label :price %>
-    <%= f.number_field :price %>
+    <%= f.number_field :price, :placeholder => "Price", :class => "form-control" %>
   </div>
+  <br>
   <div class="actions">
     <%= f.submit "Save", :class => "btn btn-success" %>
     <%= link_to "Cancel", @car, :class => "btn btn-default", :id => "cancel-button" %>
