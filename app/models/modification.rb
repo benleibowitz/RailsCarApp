@@ -1,6 +1,9 @@
 class Modification < ActiveRecord::Base
   belongs_to :car
   validates :name, :price, :presence => true
+  validates :price, numericality: {
+    :only_integer => true
+  }
 
   after_save :expire_build_cache
   after_destroy :expire_build_cache

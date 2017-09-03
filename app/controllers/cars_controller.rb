@@ -1,24 +1,26 @@
 class CarsController < ApplicationController
+  @@CARS_PER_PAGE = 30
   before_action :set_car, only: [:show, :edit, :update, :destroy]
 
   def search
-    @search_suggestions = Car.where("make LIKE :prm", prm: "#{params[:text].downcase}%")
-      .group(:make).distinct.limit(5).pluck(:make)
+    @search_suggestions = Car
+      .where("CONCAT(year, ' ', make, ' ', model) LIKE :search_query", search_query: "%#{params[:search_autocomplete].downcase.strip}%")
+      .distinct.limit(6)
 
-    render json: @search_suggestions.map(&:downcase)
+    render json: @search_suggestions.map{|car| "#{car.year} #{car.make} #{car.model}".downcase}
   end
 
   # GET /cars
   # GET /cars.json
   def index
-    show_count = params.has_key?(:show_all) ? Car.count : params[:page]
+    show_count = params.has_key?(:show_all) ? Car.count : @@CARS_PER_PAGE
 
     if params.has_key?(:search)
       @cars = Car
-        .where("make LIKE :prm OR model LIKE :prm", prm: "%#{params[:search].downcase}%")
-        .paginate(:page => show_count)
+        .where("CONCAT(year, ' ', make, ' ', model) LIKE :search_query", search_query: "%#{params[:search].downcase.strip}%")
+        .paginate(:page => params[:page])
     else
-      @cars = Car.all_from_cache.paginate(:page => 1, :per_page => show_count)
+      @cars = Car.all_from_cache.paginate(:page => params[:page], :per_page => show_count)
     end
   end
 

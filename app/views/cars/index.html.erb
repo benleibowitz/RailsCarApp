@@ -18,7 +18,7 @@ $(function(){
     $.ajax({
       type:'PUT',
       url:'/search',
-      data: { _method:'PUT', text : textVal },
+      data: { _method:'PUT', search_autocomplete : textVal },
       success:function(resp){
         //remove old search suggestions
         while(searchDropdown.firstChild) {
