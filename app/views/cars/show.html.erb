@@ -1,6 +1,12 @@
 <% content_for :title, "#{@car.year} #{@car.make} #{@car.model}" %>
 <p id="notice"><%= notice %></p>
+
+<div class="loader" id="loader"></div>
 <script>
+$('#loader').click(function(){
+  document.getElementById('loader').style.display = 'block';
+});
+
 $(document).ready(function(){
     calcMods();
 });
@@ -73,8 +79,9 @@ function selectAll() {
       <th>Modification</th>
       <th>Price</th>
       <th></th>
-      <th>Included
+      <th>Included (All:
         <input id="select-all-checkbox" type="checkbox" onclick="selectAll()" checked>
+        )
       </th>
     </tr>
   </thead>

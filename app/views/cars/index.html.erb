@@ -70,15 +70,16 @@ function selectAll() {
     allChecked = !allChecked;
 };
 </script>
-
+<%= link_to 'Show All', cars_path(:show_all => true), :class => 'btn btn-info' %>
+<%= link_to 'Show Paginated', cars_path, :class => 'btn btn-info' %>
+<br/><br/>
 <form>
   <input type="text" name="search" id="search-box" autocomplete="off" list="autocomp">
-  <datalist id="autocomp">
-  </datalist>
+    <datalist id="autocomp"></datalist>
   <input type="submit" value="Search">
 </form>
 
-<p>Cars: <strong><%= @cars.size %></strong></p>
+<p>Cars: <strong><%= Car.number_cars %></strong></p>
 <p id="gar-number">Total number of selected cars: <b>0</b></p>
 <p id="gar-cost">Total cost of selected cars: <b>$0</b></p>
 
@@ -89,6 +90,7 @@ function selectAll() {
       <th>Make</th>
       <th>Model</th>
       <th>Build Cost</th>
+      <th>Pics</th>
       <th>Select All <input type="checkbox" onclick="selectAll()"></th>
     </tr>
   </thead>
@@ -99,6 +101,7 @@ function selectAll() {
         <td><%= car.make %></td>
         <td><%= car.model %></td>
         <td>$<%= number_with_delimiter(car.build_cost, :delimiter => ',') %></td>
+        <td><%= car.number_pics %> pics</td>
         <td>
           <div class="btn-group" role="group">
             <%= link_to 'View', car, :class => "btn btn-primary" %>
@@ -111,5 +114,10 @@ function selectAll() {
     <% end %>
   </tbody>
 </table>
-
 <br>
+<div class="apple_pagination">
+    <div class="page_info">
+      <%= page_entries_info @cars %>
+    </div>
+    <%= will_paginate @cars, :container => false %>
+  </div>

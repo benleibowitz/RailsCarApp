@@ -36,7 +36,6 @@ class AssetsController < ApplicationController
   # POST /assets
   # POST /assets.json
   def create
-
     @car = Car.find(params[:car_id])
 
     # This creates a single asset if the picture uploaded

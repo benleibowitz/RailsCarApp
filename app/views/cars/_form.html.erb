@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :make %>
-    <%= f.text_field :make %>
+    <%= f.select :make, options_for_select(Car.makes, @car.make) %>
   </div>
   <div class="field">
     <%= f.label :model %>

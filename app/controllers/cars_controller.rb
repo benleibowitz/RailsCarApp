@@ -2,8 +2,9 @@ class CarsController < ApplicationController
   before_action :set_car, only: [:show, :edit, :update, :destroy]
 
   def search
-    @cars = Car.where("make LIKE :prm", prm: "#{params[:text]}%")
+    @cars = Car.where("make LIKE :prm", prm: "#{params[:text].downcase}%")
       .group(:make).distinct.limit(5)
+      .paginate(:page => params[:page])
 
     render json: @cars
   end
@@ -12,9 +13,13 @@ class CarsController < ApplicationController
   # GET /cars.json
   def index
     if params.has_key?(:search)
-      @cars = Car.where("make LIKE :prm OR model LIKE :prm", prm: "%#{params[:search]}%")
+      @cars = Car
+        .where("make LIKE :prm OR model LIKE :prm", prm: "%#{params[:search].downcase}%")
+        .paginate(:page => params[:page])
+    elsif params.has_key?(:show_all)
+      @cars = Car.all_from_cache.paginate(:page => 1, :per_page => Car.count)
     else
-      @cars = Car.all_from_cache
+      @cars = Car.paginate(:page => params[:page])
     end
   end
 

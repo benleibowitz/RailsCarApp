@@ -4,8 +4,8 @@ source 'https://rubygems.org'
 gem 'dalli'
 gem 'memcachier'
 gem 'paperclip'
-
 gem 'amoeba'
+gem 'will_paginate', '~> 3.1.0'
 
 #gem 'rack-cors', :require => 'rack/cors'
 
